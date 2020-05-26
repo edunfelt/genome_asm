@@ -1,5 +1,7 @@
 = A Genome Assembly Graph =
 
+Overview of resources used in the genome assembly graph project.
+
 == Resources ==
 
-* [[http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424|A Quick Guide to Organizing     Computational Biology Projects]]
+* [[http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424|A Quick Guide to Organizing Computational Biology Projects]]

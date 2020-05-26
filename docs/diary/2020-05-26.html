@@ -1,0 +1,74 @@
+<html>
+<head>
+    <link rel="Stylesheet" type="text/css" href="../style.css" />
+    <title>2020-05-26</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+    <a href="../index.html">Index</a> |
+    <a href="../diary/diary.html">Diary</a>
+    <hr>
+    <div class="content">
+    
+<div id="2020-05-26"><h1 id="2020-05-26" class="header"><a href="#2020-05-26">2020-05-26</a></h1></div>
+
+<div id="2020-05-26-Investigation of data file"><h2 id="Investigation of data file" class="header"><a href="#2020-05-26-Investigation of data file">Investigation of data file</a></h2></div>
+<p>
+The file consists of 12 columns, of which only columns 1-2, 6-8 and 10-12 are of interest in this project. The first two columns represent the contig identifiers, columns 6 and 7 represent the start and end of the overlap in the first contig, and column 8 represent the length of the first contig.
+Columns 10 and 11 likewise represent the start and end of the overlap in the second contig, and the final column represents the length of this contig.
+</p>
+
+<p>
+Because of the size of the data file, the best method to examine it is by using Unix tools, for example the <code>Head</code> command or the <code>Less</code> command. Upon inspection, it becomes clear that the contig identifiers are very long sequences of letters and numbers that, in this project, are largely meaningless. It would therefore be desirable to replace these with integers instead. We would also like to remove the columns that are not going to be used. 
+</p>
+
+<p>
+One way to pursue this could be to:
+</p>
+<ul>
+<li>
+Trim the data file by:
+
+<ul>
+<li>
+identify and remove contigs completely contained in each other
+
+<li>
+replace identifiers with integers
+
+<li>
+remove unnecessary data
+
+</ul>
+<li>
+Read trimmed data into a graph data structure, for example by reusing code from lab6
+
+<li>
+Examine the resulting graph structure by finding the:
+
+<ul>
+<li>
+node degree distribution 
+
+<li>
+number of connected components
+
+<li>
+size distribution of the connected components
+
+</ul>
+</ul>
+
+<div id="2020-05-26-Test files added"><h2 id="Test files added" class="header"><a href="#2020-05-26-Test files added">Test files added</a></h2></div>
+<p>
+It will not be feasible to work directly with the original data, because of the large file size, and the risk of making mistakes. Therefore the first step is to write a couple of test files that follow the same structure as the original version of the data file. These files are stored in the subdirectory '01' under 'data' to indicate that they are our first batch of test files.
+</p>
+
+<p>
+There are three test files, with a sketch attached that describes the overlaps and the resulting graph. In the first test case the result should be a connected graph and three contigs should be discarded. In the second case, the result is two connected components and three discarded contigs. The final case again describes one connected component and seven discarded contigs. There might be reason to adapt/extend these test cases when the code is ready.
+</p>
+
+    </div>
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/config/TeX-AMS-MML_HTMLorMML.js"></script>
+</html>
