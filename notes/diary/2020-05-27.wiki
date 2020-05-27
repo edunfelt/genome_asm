@@ -1,0 +1,72 @@
+= 2020-05-27 =
+
+== DataTrim class ==
+What it does:
+* Input: text file in which each row contains 12 values, according to the specifiations in the project instructions
+* Output: text file in which value 3, 4, 5 and 9 on each row has been removed, the values at place 1 and 2 has been changed to  integers, and rows that represent complete overlaps are removed
+
+Private methods:
+* Main: reads file line by line and removes unneccessary columns, and changes the id's to an integer value starting at 0, utilizes the private method `Unique` to identify and ignore rows that describe complete overlaps. Writes to new file.
+* `Unique(String s)`: takes a string array and returs `True` if it describes a complete overlap, `False` otherwise
+
+The code in its current state appears to run as desired, and the result looks promising on the three test files written yesterday. The trimmed version of the first file looks as follows:
+```
+0    1    0    3    4    3    6    6
+0    2    3    4    4    0    1    4
+0    3    1    4    4    0    3    5
+0    4    1    4    4    0    3    5
+1    5    0    1    6    1    2    2
+1    6    0    3    6    2    4    4
+1    3    3    6    6    0    3    5
+1    4    3    6    6    0    3    5
+7    2    0    1    3    3    4    5
+8    6    1    2    2    0    1    4
+2    3    0    2    4    3    5    5
+2    4    0    2    4    3    5    5
+```
+
+The trimmed version of the second file:
+```
+0    1    0    1    2    3    4    4
+1    2    0    3    4    1    4    4
+1    3    0    1    4    4    5    5
+2    4    0    1    4    2    3    3
+2    3    0    1    4    3    5    5
+5    6    0    1    2    3    4    4
+6    7    0    3    4    1    4    4
+8    4    1    2    2    0    1    3
+```
+
+And finally the trimmed version of the third file:
+```
+0    1    0    1    6    2    3    3
+0    2    0    3    6    1    4    4
+1    2    1    3    3    0    2    4
+0    3    4    6    6    0    2    7
+0    4    4    6    6    0    2    3
+0    5    5    6    6    0    1    2
+0    6    5    6    6    0    1    3
+0    7    5    6    6    0    1    4
+0    8    5    6    6    0    1    5
+```
+
+So in short, everything looks promising! The code appears to be ready for the final test: to run on the actual data. Running `time java -jar datatrim.jar [file]` yields 
+```
+real	3m22,287s
+user	4m21,354s
+sys	0m5,228s
+```
+which appears to reasonable times, considering the file size. Output of applying the Unix `head` command to the trimmed file is
+```
+0    1    13515    28201    28201    2078    16758    16758
+0    2    0    6471    28201    71    6555    6555
+0    3    0    6481    28201    0    6489    6560
+0    4    8271    28201    28201    2081    22005    22005
+0    5    13211    28201    28201    4986    19970    19970
+0    6    25756    28201    28201    0    2428    3176
+0    7    25216    28201    28201    0    2970    3610
+8    9    23429    24971    24971    0    1542    5251
+8    10    6369    24971    24971    0    18604    44247
+8    11    0    1697    24971    22213    23909    23909
+```
+which, again, points to the program working as expected. One can also note that the file size has been significantly reduced, to "only" 1.4GB compared to the original 7.5GB. It might be worth investigating just how many lines was removed in the future.
