@@ -1,6 +1,0 @@
-Today I set up the file structure of the project in accordance with the article
-[[http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424|A Quick Guide to Organizing Computational Bilogoy Projects]]. A very interesting read indeed!
-I hope by following the methods described in the article the project will be easier to
-manage and work with, and also easier to understand for collaborators and teachers.
-
-I will attempt to put this journal on the web using Vimwiki.
