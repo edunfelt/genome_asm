@@ -1,0 +1,104 @@
+<html>
+<head>
+    <link rel="Stylesheet" type="text/css" href="../style.css" />
+    <title>2020-05-28</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+    <a href="../index.html">Index</a> |
+    <a href="../diary/diary.html">Diary</a>
+    <hr>
+    <div class="content">
+    
+<div id="2020-05-28"><h1 id="2020-05-28" class="header"><a href="#2020-05-28">2020-05-28</a></h1></div>
+
+<div id="2020-05-28-GenomeGraph class"><h2 id="GenomeGraph class" class="header"><a href="#2020-05-28-GenomeGraph class">GenomeGraph class</a></h2></div>
+<p>
+What it does:
+</p>
+<ul>
+<li>
+A graph data structure that describes the contig overlaps
+
+<li>
+Finds connected components
+
+<li>
+Determines the size of a graph
+
+<li>
+Contigs are stored together with their length
+
+</ul>
+
+<p>
+Methods:
+</p>
+<ul>
+<li>
+<code>addContig(Contig c)</code>: add a contig (node) to the graph
+
+<li>
+<code>addOverlap(Contig c1, Contig c2)</code>: add an edge representing an overlap between the contigs c1 and c2
+
+<li>
+<code>contigDegree(Contig c)</code>: determine the degree of a contig
+
+<li>
+<code>getComponents</code>: find all connected components of G
+
+<li>
+<code>getSize</code>: determine the size of G
+
+</ul>
+
+<p>
+The class also implements an Iterator interface that iterates over all the contigs in the graph, whether or not they belong to a connected component.
+I have yet to implement the <code>getComponents</code> method, but a possible approach is using BFS to find a connected component, and then repreat the algorithm until each vertex in the graph is visited. 
+The <code>GenomeGraph</code> class should be complemented by a IO class that can read the trimmed files and output a neat presentation of the results.
+</p>
+
+<p>
+In its current state the class is tested with the following code:
+</p>
+<pre java>
+    public static void main(String[] args) {
+        GenomeGraph graph = new GenomeGraph();
+        Contig c1 = new Contig(0, 5);
+        Contig c2 = new Contig(1, 10);
+        Contig c3 = new Contig(2, 15);
+        Contig c4 = new Contig(3, 20);
+        graph.addContig(c1);
+        graph.addContig(c2);
+        graph.addContig(c3);
+        graph.addContig(c4);
+
+        graph.addOverlap(c1, c2);
+        graph.addOverlap(c1, c3);
+        graph.addOverlap(c2, c4);
+
+        System.out.println("Size: " + graph.getSize());
+
+        for (Contig c : graph) {
+            System.out.println(c.getContigId() + " " + c.getLength() + " " + graph.contigDegree(c));
+        }
+    }
+</pre>
+<p>
+which gives the following output:
+</p>
+<pre>
+Size: 4
+3 20 1
+2 15 1
+1 10 2
+0 5 2
+</pre>
+<p>
+as expected.
+</p>
+
+    </div>
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/config/TeX-AMS-MML_HTMLorMML.js"></script>
+</html>
