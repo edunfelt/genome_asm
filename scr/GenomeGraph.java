@@ -11,39 +11,21 @@ public class GenomeGraph implements Iterable<GenomeGraph.Contig> {
         adjList = new ArrayList<>();
     }
 
-    public static void main(String[] args) {
-        GenomeGraph graph = new GenomeGraph();
-        Contig c1 = new Contig(0, 5);
-        Contig c2 = new Contig(1, 10);
-        Contig c3 = new Contig(2, 15);
-        Contig c4 = new Contig(3, 20);
-        graph.addContig(c1);
-        graph.addContig(c2);
-        graph.addContig(c3);
-        graph.addContig(c4);
-
-        graph.addOverlap(c1, c2);
-        graph.addOverlap(c1, c3);
-        graph.addOverlap(c2, c4);
-
-        System.out.println("Size: " + graph.getSize());
-
-        for (Contig c : graph) {
-            System.out.println(c.getContigId() + " " + c.getLength() + " " + graph.contigDegree(c));
-        }
-    }
-
     public void addContig(Contig c) {
-        while(c.getContigId() >= size) {
-            size++;
+        while(c.getContigId() >= adjList.size()) {
             adjList.add(new ArrayList<>());
         }
-        adjList.get(c.getContigId()).add(c);
+        if (adjList.get(c.getContigId()).size() == 0) {
+            size++;
+            adjList.get(c.getContigId()).add(c);
+        }
     }
 
     public void addOverlap(Contig c1, Contig c2) {
-        adjList.get(c1.getContigId()).add(c2);
-        adjList.get(c2.getContigId()).add(c1);
+        if (!adjList.get(c1.getContigId()).contains(c2)) {
+            adjList.get(c1.getContigId()).add(c2);
+            adjList.get(c2.getContigId()).add(c1);
+        }
     }
 
     public int getSize() {
@@ -56,9 +38,40 @@ public class GenomeGraph implements Iterable<GenomeGraph.Contig> {
 
     public ArrayList<GenomeGraph> getComponents() {
         ArrayList<GenomeGraph> components = new ArrayList<>();
+        ArrayList<Boolean> status = new ArrayList<>();
 
-        /* TO DO */
+        for (int i = 0; i < size; i++) {
+            status.add(false);
+        }
 
+        while (status.contains(false)) {
+            int notVisited = status.indexOf(false);
+
+            GenomeGraph component = new GenomeGraph();
+            Contig start = adjList.get(notVisited).get(0);
+            Queue<Contig> contigQueue = new LinkedList<>();
+
+            contigQueue.add(start);
+            status.set(notVisited, true);
+            component.addContig(start);
+
+            while (contigQueue.peek() != null) {
+                Contig current = contigQueue.remove();
+
+                for (Contig neighb : adjList.get(current.getContigId())) {
+                    if (current != neighb) {
+                        if (!status.get(neighb.getContigId())) {
+                            contigQueue.add(neighb);
+                            status.set(neighb.getContigId(), true);
+                        }
+                        component.addContig(neighb);
+                        component.addOverlap(current, neighb);
+                    }
+                }
+            }
+
+            components.add(component);
+        }
         return components;
     }
 
