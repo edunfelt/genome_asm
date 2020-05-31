@@ -1,0 +1,78 @@
+<html>
+<head>
+    <link rel="Stylesheet" type="text/css" href="../style.css" />
+    <title>2020-05-31</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+    <a href="../index.html">Index</a> |
+    <a href="../diary/diary.html">Diary</a>
+    <hr>
+    <div class="content">
+    
+<div id="2020-05-31"><h1 id="2020-05-31" class="header"><a href="#2020-05-31">2020-05-31</a></h1></div>
+
+<div id="2020-05-31-GenomeGraph, GenomeIO and DisplayData updates"><h2 id="GenomeGraph, GenomeIO and DisplayData updates" class="header"><a href="#2020-05-31-GenomeGraph, GenomeIO and DisplayData updates">GenomeGraph, GenomeIO and DisplayData updates</a></h2></div>
+
+<p>
+Yesterday I attempted to run my code on the real data, however some problems cropped up quite quickly. The program returned with a OutOfMemoryError with a warning that the GC overhead limit was exceeded, indicating that a memory leak is occurring in the program. Some investigating showed that this was caused by the <code>getComponents</code> method of GenomeGraph. 
+After fixing this problem by changing to a recursive DFS algorithm another error appeared, when running the problem on the original file. This time it was a StackOverFlowError , thrown when too many (according to he JVM) recursive function calls where made. A solution to that, in this case when we know that the algorithm won't run forever, is to include the flag -Xss4g on the command line so increase the stack size.
+</p>
+
+<p>
+Secondly, some updates had to be made to the Python script to display the results in an appealing and informative way. As it turns out, both the contig degrees and the sizes of the components are massively centered around smaller values, below 10, but there are also quite many with significantly larger values. This resulted in great difficulty displaying the information. I chose to only display plots with values less than 20, but to also include some information about the mean and larger values.
+</p>
+
+<p>
+So in conclusion, to run the whole analysis on a data file with the original format: first run the datatrim jar-file on the data, then gun genomeio on the resulting file, and pipe the results to the DisplayData script. For example:
+</p>
+
+<pre bash>
+-Xss4g -Xmx4g -jar genomeio.jar trim_t02.txt | python DisplayData.py
+</pre>
+
+<p>
+returns the file
+</p>
+<pre>
+9
+1    1    2    1    2    2    3    3    1    
+2
+6    3
+</pre>
+<p>
+and prints the graph
+<img src="../graph.png" />
+</p>
+
+<p>
+Similarly, running the command
+</p>
+<pre>
+java -Xss4g -Xmx4g -jar genomeio.jar trim_Spruce_fingerprint_2017-03-10_16.48.olp.m4 | python DisplayData.py 
+</pre>
+<p>
+yields the plot
+<img src="../../notes/diary/~Documents/genome_asm/docs/spruce_graph.png" />
+Interestingly, the running time is quite fast for this command:
+</p>
+<pre>
+time java -Xss4g -Xmx4g -jar genomeio.jar trim_Spruce_fingerprint_2017-03-10_16.48.olp.m4 | python DisplayData.py 
+</pre>
+<p>
+prints
+</p>
+<pre>
+real	1m20,392s
+user	3m35,831s
+sys	0m2,269s
+</pre>
+
+<p>
+Other than these updates, I have now commented the code properly, and I believe it is time to write the report tomorrow.
+</p>
+
+    </div>
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/config/TeX-AMS-MML_HTMLorMML.js"></script>
+</html>
