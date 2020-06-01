@@ -38,7 +38,8 @@
   \markright{\MakeUppercase{\thesubsection.\ #1}}}
 \fancyhead[LO]{\nouppercase{\rightmark}}
 \fancyhead[RE]{\nouppercase{\rightmark}}
-\fancyhead[LE, RO]{\thepage}
+%\fancyhead[LE, RO]{\thepage}
+\cfoot{\thepage}
 
 
 % Titles
@@ -51,7 +52,7 @@
   {3pc}{*3}{*2}[3pc]
 
 \titleformat{\subsection}[runin]
-  {\normalfont\scshape}
+  {\bfseries\scshape}
   {\S\ \thesubsection.}{.5em}{}[.]
 \titlespacing{\subsection}
   {\parindent}{1.5ex plus .1ex minus .2ex}{5pt}

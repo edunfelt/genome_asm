@@ -1,6 +1,12 @@
 \documentclass[12pt, twoside, a4paper, notitlepage]{report}
 \include{preamble}
 
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+}
+
 \makeatletter
 \newcommand*{\toccontents}{\@starttoc{toc}}
 \makeatother
@@ -12,24 +18,14 @@
 \maketitle
 
 \toccontents
-\newpage
 
 \section{Introduction}
-%\input{sections/introduction}
+\input{sections/introduction}
 \newpage
 
 \section{Method}
-%\input{sections/method}
-\newpage
+\input{sections/method}
 
 \section{Results}
-%\input{sections/results}
-\newpage
-
-\section{Conclusion}
-%\input{sections/conclusion}
-
-%\bibliographystyle{abbrv}
-%\bibliography{references}
-
+\input{sections/results}
 \end{document}
