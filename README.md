@@ -2,6 +2,8 @@
 
 This project structure approximately follows the structure described in *A Quick Guide to Organizing Computational Biology Projects*.
 
+[Project diary](https://edunfelt.github.io/genome_asm/diary/diary.html)
+
 Directories:
 - bin: for compiled code
 - data: data and test files
