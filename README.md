@@ -10,3 +10,5 @@ Directories:
 - docs: files for the wiki-style project diary
 - report: project report
 - src: java files
+
+Emilia Dunfelt
