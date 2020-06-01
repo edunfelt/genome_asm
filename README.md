@@ -1,10 +1,10 @@
 # DA3018: A Genome Assembly Graph
 
-This project structure follows the structure described in *A Quick Guide to Organizing Computational Biology Projects*.
+This project structure approximately follows the structure described in *A Quick Guide to Organizing Computational Biology Projects*.
 
 Directories:
 - bin: for compiled code
 - data: data and test files
-- notes: files for the wiki-style project diary
+- docs: files for the wiki-style project diary
 - report: project report
-- src: java files and shell scripts
+- src: java files
